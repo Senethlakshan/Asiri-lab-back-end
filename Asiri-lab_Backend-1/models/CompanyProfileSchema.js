@@ -7,7 +7,9 @@ const companyProfileSchema = new mongoose.Schema({
   profile_name: { type: String, required: true },
   address: { type: String, required: true },
   contactNumber: { type: String, required: true },
-  createDateTime: { type: Date, default: Date.now }
+  createDateTime: { type: Date, default: Date.now },
+  proposerCode: { type: String, required: true },
+
 });
 
 const CompanyProfile = mongoose.model('CompanyProfile', companyProfileSchema);

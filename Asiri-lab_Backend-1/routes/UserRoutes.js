@@ -21,6 +21,42 @@ router.get('/viewall', [passport.authenticate('jwt', { session: false }), roleCh
 });
 
 
+// Route to get user details by ObjectId
+router.get('/userbyId/:id', async (req, res) => {
+  try {
+      const userId = req.params.id; // Get the ObjectId passed in the URL
+      const user = await UserCredential.findById(userId); // Find the user by ID
+      const userbyid = await UserDetails.findById(user.userId);
+
+      userId
+
+      if (!user) {
+          return res.status(404).send({ message: 'User not found.' });
+      }
+
+      const userPassdata ={
+
+        username :user.username,
+        role: user.role,
+
+      }
+
+      res.status(200).json(
+      {
+        message: "User found !",
+        params: userPassdata,
+        userdata : userbyid
+
+      }
+        
+      );
+  } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: 'Server error occurred while fetching user details.' });
+  }
+});
+
+
 
 router.put('/update/:userId', [passport.authenticate('jwt', { session: false }), roleCheck(['admin'])], async (req, res) => {
     const { userId } = req.params;

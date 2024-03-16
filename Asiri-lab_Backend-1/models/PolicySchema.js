@@ -5,7 +5,7 @@ const policySchema = new mongoose.Schema({
   policyNumber: { type: String, required: true, unique: true },
   createDate: { type: Date, default: Date.now },
   commenceDate: { type: Date, required: true },
-  status: { type: String, required: true, enum: ['active', 'inactive', 'expired'] }, 
+  status: { type: String, required: true }, 
   companyID: { type: String, required: true, ref: 'CompanyProfile' } 
 });
 
