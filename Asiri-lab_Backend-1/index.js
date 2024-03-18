@@ -5,7 +5,9 @@ const connectDB = require('./config/db');
 const passport = require('passport');
 const cors = require('cors');
 const userRoutes = require("./routes/UserRoutes");
-const createComProfilerRoutes = require("./routes/CompanyProfileRoutes");
+const patientRoutes = require("./routes/PatientsRoutes");
+const appointmentRoutes = require("./routes/AppoinmentRoutes");
+
 
 require('dotenv').config();
 
@@ -26,7 +28,7 @@ app.use(cookieParser());
 
 // CORS configuration 
 const corsOptions = {
-    origin: 'http://localhost:5173', 
+    origin: 'http://localhost:3000', 
     credentials: true, 
     optionsSuccessStatus: 200 // For legacy browser support
   };
@@ -38,9 +40,9 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 
 // Routes
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/auth/user',userRoutes);
-app.use('/api/auth/admin/s1',createComProfilerRoutes);
+app.use('/api/v1/user',patientRoutes);
+app.use('/api/v1/user/details',userRoutes);
+app.use('/api/v1/user/appointment',appointmentRoutes);
 
 
 const PORT = process.env.PORT || 5000;

@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const UserCredential = require('../models/UserCredential');
-const UserDetails = require('../models/UserDetails');
+const UserDetails = require('../models/PatientSchema'); 
 const roleCheck = require('../middleware/roleMiddleware');
 
 const nodemailer = require('nodemailer');
